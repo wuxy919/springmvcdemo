@@ -18,7 +18,20 @@
         <property name="suffix" value=".jsp"></property>
     </bean>
 
-    <mvc:annotation-driven>
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <list>
+                <!-- 日期转换器 -->
+                <bean class="com.wuxy.converter.DateConverter">
+                    <constructor-arg type="java.lang.String" value="yyyy-MM-dd"></constructor-arg>
+                </bean>
+                <!-- Student转换器 -->
+                <bean class="com.wuxy.converter.StudentConverter"></bean>
+            </list>
+        </property>
+    </bean>
+
+    <mvc:annotation-driven conversion-service="conversionService">
         <!-- 消息转换 -->
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">

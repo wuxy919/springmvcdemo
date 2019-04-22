@@ -1,10 +1,11 @@
 package com.wuxy.controller;
 
+import com.wuxy.entity.Student;
 import com.wuxy.entity.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 
 /**
  * @author: wuxy
@@ -37,6 +38,30 @@ public class TestController {
     public String addUser(User user) {
         System.out.println(user);
         return "index";
+    }
+
+    @RequestMapping("/dateConverTest")
+    public String getDate(Date date) {
+        System.out.println(date);
+        return "index";
+    }
+
+    @RequestMapping("/studentConverterTest")
+    @ResponseBody
+    public Student studentConverter(Student student) {
+        return student;
+    }
+
+    @PutMapping("/httpPut/{id}/{name}")
+    @ResponseBody
+    public String httpPut(@PathVariable("id") int id, @PathVariable("name") String name) {
+        return "id:" + id +"--name:" + name;
+    }
+
+    @DeleteMapping("/httpDelete")
+    @ResponseBody
+    public String httpDelete() {
+        return "DELETE";
     }
 
 }
