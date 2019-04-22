@@ -3,7 +3,9 @@ package com.wuxy.controller;
 import com.wuxy.entity.User;
 import com.wuxy.entity.UserList;
 import com.wuxy.entity.UserMap;
+import com.wuxy.entity.UserSet;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -58,6 +60,23 @@ public class DataController {
             stringBuffer.append(user).append(" ");
         }
         return "用户：" + stringBuffer.toString();
+    }
+
+    @RequestMapping("/setType")
+    @ResponseBody
+    public String setType(UserSet userSet) {
+        StringBuffer stringBuffer = new StringBuffer();
+        for (User user : userSet.getUserSet()) {
+            stringBuffer.append(user).append(" ");
+        }
+        return "用户：" + stringBuffer.toString();
+    }
+
+    @RequestMapping("/jsonType")
+    @ResponseBody
+    public User jsonType(@RequestBody User user) {
+        user.setId(user.getId() + 10);
+        return user;
     }
 
 }

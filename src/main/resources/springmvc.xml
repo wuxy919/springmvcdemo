@@ -24,6 +24,8 @@
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
                 <property name="supportedMediaTypes" value="text/html;charset=UTF-8"></property>
             </bean>
+            <!-- fastjson -->
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter4"></bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
 
