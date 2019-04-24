@@ -18,6 +18,23 @@
         <property name="suffix" value=".jsp"></property>
     </bean>
 
+    <!-- 国际化资源文件 -->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <!-- 表示多语言配置文件在根目录下，以language开头的文件 -->
+        <property name="basename" value="classpath:language"></property>
+        <property name="useCodeAsDefaultMessage" value="true"></property>
+    </bean>
+
+    <!-- 拦截器 -->
+    <mvc:interceptors>
+        <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <property name="paramName" value="lang"></property>
+        </bean>
+    </mvc:interceptors>
+
+    <!-- 配置SessionLocalResolver，动态获取Local额对象存入session -->
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"></bean>
+
     <!--<mvc:annotation-driven></mvc:annotation-driven>-->
     <!-- 基于Validator的验证器 -->
    <!-- <mvc:annotation-driven validator="adminValidator"></mvc:annotation-driven>
@@ -62,7 +79,7 @@
         </mvc:message-converters>
     </mvc:annotation-driven>-->
 
-    <mvc:annotation-driven validator="studentValidator"/>
-    <bean id="studentValidator" class="com.wuxy.validator.StudentValidator"></bean>
+    <!--<mvc:annotation-driven validator="studentValidator"/>-->
+    <!--<bean id="studentValidator" class="com.wuxy.validator.StudentValidator"></bean>-->
 
 </beans>
