@@ -31,6 +31,21 @@
         </property>
     </bean>
 
+    <!-- 配置CommonsMultipartResolver bean -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 处理文件名中文乱码 -->
+        <property name="defaultEncoding" value="utf-8"></property>
+        <!-- 设置多文件上传时,总大小上限,不设置的话没有限制, 以byte为单位 1M=1024*1024 -->
+        <property name="maxUploadSize" value="11048576"></property>
+        <!-- 设置单个上传文件的大小上限 -->
+        <property name="maxUploadSizePerFile" value="11048576"></property>
+    </bean>
+
+    <!-- 设置异常解析器 -->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="defaultErrorView" value="error"></property>
+    </bean>
+
     <mvc:annotation-driven conversion-service="conversionService">
         <!-- 消息转换 -->
         <mvc:message-converters>
